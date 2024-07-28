@@ -11,6 +11,11 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('blog/assets/write.png') }}" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ asset('blog/css/styles.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('mystyle.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -21,11 +26,11 @@
     @endif
 
     <!-- Page content-->
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             @yield('content')
 
-            @if (Request::is('/'))
+            @if ($title != 'Login')
                 @include('blog.layout.aside')
             @endif
         </div>

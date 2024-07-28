@@ -3,87 +3,53 @@
 @section('content')
     <div class="col-lg-8">
         <!-- Featured blog post-->
-        <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
-                    alt="..." /></a>
-            <div class="card-body">
-                <div class="small text-muted">January 1, 2023</div>
-                <h2 class="card-title">Featured Post Title</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-                    aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi
-                    vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                <a class="btn btn-primary" href="#!">Read more →</a>
+        <div class="card mb-4 border-0">
+            <a href="{{ 'artikel/' . $articles[0]->slug }}"><img class="card-img-top"
+                    src="{{ asset('images/' . $articles[0]->gambar) }}" alt="gambar artikel" /></a>
+            <div class="card-body px-0">
+                <div class="small text-muted">Diposting {{ $articles[0]->created_at->format('d F Y') }} - Kategori <a
+                        href="/artikel?kategori={{ $articles[0]->category->slug }}"
+                        class="text-decoration-none">{{ $articles[0]->category->nama }}</a></div>
+                <h2 class="card-title">{{ $articles[0]->judul }}</h2>
+                <p class="card-text">{{ strip_tags($articles[0]->kutipan) }}</p>
+                <a class="text-decoration-none" href="/artikel/{{ $articles[0]->slug }}">Lanjut Baca →</a>
+                <div class="mt-3">
+                    @foreach ($articles[0]->tags as $tag)
+                        <a href="/artikel?tag={{ $tag->slug }}"
+                            class="badge bg-secondary text-decoration-none link-light">{{ $tag->name }}</a>
+                    @endforeach
+                </div>
             </div>
         </div>
         <!-- Nested row for non-featured blog posts-->
         <div class="row">
-            <div class="col-lg-6">
-                <!-- Blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                            alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 1, 2023</div>
-                        <h2 class="card-title h4">Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Reiciendis aliquid atque, nulla.</p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
+            @foreach ($articles->skip(1) as $article)
+                <div class="col-lg-6">
+                    <div class="card mb-4 border-0">
+                        <a href="{{ 'artikel/' . $article->slug }}"><img class="card-img-top"
+                                src="{{ asset('images/' . $article->gambar) }}" alt="gambar artikel" /></a>
+                        <div class="card-body px-0">
+                            <div class="small text-muted">Diposting {{ $article->created_at->format('d F Y') }} -
+                                Kategori
+                                <a href="/artikel?kategori={{ $article->category->slug }}"
+                                    class="text-decoration-none">{{ $article->category->nama }}</a>
+                            </div>
+                            <h2 class="card-title">{{ $article->judul }}</h2>
+                            <p class="card-text">{{ strip_tags($article->kutipan) }}</p>
+                            <a class="text-decoration-none" href="/artikel/{{ $article->slug }}">Lanjut Baca →</a>
+                            <div class="mt-3">
+                                @foreach ($article->tags as $tag)
+                                    <a href="/artikel?tag={{ $tag->slug }}"
+                                        class="badge bg-secondary text-decoration-none link-light">{{ $tag->name }}</a>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- Blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                            alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 1, 2023</div>
-                        <h2 class="card-title h4">Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Reiciendis aliquid atque, nulla.</p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <!-- Blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                            alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 1, 2023</div>
-                        <h2 class="card-title h4">Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Reiciendis aliquid atque, nulla.</p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
-                    </div>
-                </div>
-                <!-- Blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                            alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 1, 2023</div>
-                        <h2 class="card-title h4">Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- Pagination-->
-        <nav aria-label="Pagination">
-            <hr class="my-0" />
-            <ul class="pagination justify-content-center my-4">
-                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
-                        aria-disabled="true">Newer</a></li>
-                <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-            </ul>
-        </nav>
+        <hr>
+        {{ $articles->links() }}
     </div>
 @endsection
