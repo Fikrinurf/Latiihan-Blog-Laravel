@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/artikel', [BlogController::class, 'article']);
+Route::get('/artikel/{article:slug}', [BlogController::class, 'detail']);
 
 Route::redirect('home', '/dashboard');
 

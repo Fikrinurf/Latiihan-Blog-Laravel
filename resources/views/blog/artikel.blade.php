@@ -3,6 +3,9 @@
 @section('content')
     <div class="col-lg-8">
         @if ($articles->count())
+            @if ($filter)
+                <h3 class="mb-3">{{ $filter_name }} - <span class="text-primary"> {{ $filter }}</span></h3>
+            @endif
             <div class="card mb-4 border-0">
                 <a href="{{ 'artikel/' . $articles[0]->slug }}"><img class="card-img-top"
                         src="{{ asset('images/' . $articles[0]->gambar) }}" alt="gambar artikel" /></a>

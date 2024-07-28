@@ -10,7 +10,8 @@
                  <li class="nav-item"><a class="nav-link {{ $title == 'Beranda' ? 'active' : '' }}"
                          href="{{ url('/') }}">Beranda</a>
                  </li>
-                 <li class="nav-item"><a class="nav-link {{ $title == 'Artikel' ? 'active' : '' }}"
+                 <li class="nav-item"><a
+                         class="nav-link {{ $title == 'Artikel' || $title == 'Artikel Detail' ? 'active' : '' }}"
                          href="{{ url('/artikel') }}">Artikel</a></li>
                  <li class="nav-item"><a class="nav-link" href="#!">Tentang</a></li>
                  @auth
