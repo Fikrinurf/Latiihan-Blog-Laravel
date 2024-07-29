@@ -23,6 +23,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'foto',
+        'alamat',
+        'telepon',
+        'keahlian',
+        'words'
     ];
 
     /**
@@ -47,6 +52,6 @@ class User extends Authenticatable
 
     public function articles(): HasMany
     {
-        return $this->hashMany(Article::class);
+        return $this->hasMany(Article::class);
     }
 }

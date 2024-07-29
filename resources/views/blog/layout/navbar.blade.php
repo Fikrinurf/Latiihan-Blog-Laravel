@@ -13,7 +13,8 @@
                  <li class="nav-item"><a
                          class="nav-link {{ $title == 'Artikel' || $title == 'Artikel Detail' ? 'active' : '' }}"
                          href="{{ url('/artikel') }}">Artikel</a></li>
-                 <li class="nav-item"><a class="nav-link" href="#!">Tentang</a></li>
+                 <li class="nav-item {{ $title == 'Tentang' ? 'active' : '' }}"><a class="nav-link"
+                         href="/tentang">Tentang</a></li>
                  @auth
                      <li class="nav-item dropdown">
                          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"

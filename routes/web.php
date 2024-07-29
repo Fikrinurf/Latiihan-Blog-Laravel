@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/artikel', [BlogController::class, 'article']);
 Route::get('/artikel/{article:slug}', [BlogController::class, 'detail']);
+Route::get('/tentang', [BlogController::class, 'about']);
 
 Route::redirect('home', '/dashboard');
 
@@ -29,9 +31,8 @@ Route::get('/login', [AuthController::class, 'index'])->name('login')->middlewar
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index')->with(['title' => 'About']);
-})->middleware('auth');
+Route::get('/dashboard', [AboutController::class, 'index'])->middleware('auth');
+Route::put('/dashboard', [AboutController::class, 'update'])->middleware('auth');
 
 Route::resource('/dashboard/slide', SlideController::class)->middleware('auth');
 

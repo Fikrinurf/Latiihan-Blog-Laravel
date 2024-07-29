@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Slide;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -76,6 +77,20 @@ class BlogController extends Controller
                 'article'       => $article,
                 'views'         => Article::latest()->take(5)->get(),
                 'label'         => 'Artikel Terbaru'
+            ]
+        );
+    }
+
+    public function about(Article $article, User $user)
+    {
+
+        return view('blog.tentang')->with(
+            [
+                'title'  => 'tentang',
+                'categories' => Category::all(),
+                'users' => User::where('id', 1)->get(),
+                'views' => Article::orderBy('view', 'desc')->take(5)->get(),
+                'label' => 'Artikel Popular'
             ]
         );
     }

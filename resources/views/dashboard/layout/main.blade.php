@@ -21,10 +21,13 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
 
     {{-- bootstrap ui --}}
-    <link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.css">
+
+    {{-- my css --}}
+    <link rel="stylesheet" href="{{ asset('mystyle.css') }}">
 
     <style>
         .ck-editor__editable {
@@ -83,15 +86,19 @@
             $('#myTable').DataTable();
         });
     </script>
-    <script>
-        $('#tokenfield').tokenfield({
-            autocomplete: {
-                source: [],
-                delay: 100
-            },
-            showAutocompleteOnFocus: true
-        })
-    </script>
+
+    @if ($title == 'About' || $title == 'Artikel')
+        <script>
+            $('#tokenfield').tokenfield({
+                autocomplete: {
+                    source: [{!! $source !!}],
+                    delay: 100
+                },
+                showAutocompleteOnFocus: true
+            })
+        </script>
+    @endif
+
     @stack('js')
 
 </body>
